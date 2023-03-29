@@ -8,7 +8,6 @@ mod erc20 {
     use starknet::ContractAddressZeroable;
     use zeroable::Zeroable;
 
-
 trait IERC20 {
     fn name() -> felt252;
     fn symbol() -> felt252;
