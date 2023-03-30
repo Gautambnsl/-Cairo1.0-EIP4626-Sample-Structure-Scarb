@@ -1,13 +1,6 @@
 use starknet::ContractAddress;
 
-#[contract]
-mod erc20 {
-    use starknet::get_caller_address;
-    use starknet::ContractAddress;
-    use starknet::contract_address_const;
-    use starknet::ContractAddressZeroable;
-    use zeroable::Zeroable;
-
+#[abi]
 trait IERC20 {
     fn name() -> felt252;
     fn symbol() -> felt252;
@@ -20,6 +13,18 @@ trait IERC20 {
     fn approve(spender: ContractAddress, amount: u256) -> bool;
     fn initializer_ERC(name: felt252, symbol: felt252);
 }
+
+
+#[contract]
+mod erc20 {
+    use starknet::get_caller_address;
+    use starknet::ContractAddress;
+    use starknet::contract_address_const;
+    use starknet::ContractAddressZeroable;
+    use zeroable::Zeroable;
+    use scarbTestingPackage::erc20::IERC20;
+
+
 
     struct Storage {
         _name: felt252,

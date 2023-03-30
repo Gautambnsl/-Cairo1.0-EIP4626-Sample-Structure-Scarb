@@ -1,3 +1,5 @@
+use starknet::ContractAddress;
+
 #[contract]
 mod ERC4626 {
     use zeroable::Zeroable;
@@ -6,6 +8,16 @@ mod ERC4626 {
     use starknet::ContractAddressZeroable;
     use starknet::contract_address::ContractAddress;
     use scarbTestingPackage::erc20::erc20::ERC20;
+
+
+trait IERC4646 {
+    fn initializer(asset_: felt252, name:felt252, symbol:felt252,decimals:u8,value:u256);
+    fn initalize_allones(value: u256);
+    fn max_deposit(to: felt252) -> u256;
+    fn max_mint(to: felt252) -> u256;
+    fn max_redeem(caller: ContractAddress) -> u256;
+    }
+
 
     struct Storage {
         asset : felt252,
@@ -20,6 +32,9 @@ mod ERC4626 {
     #[event]
     fn Withdraw(from_: felt252, to:felt252, amount: u256, shares: u256) {}
 
+
+    impl erc4646 of IERC4646 {
+    
     fn initializer(asset_: felt252, name:felt252, symbol:felt252,decimals:u8,value:u256) {
     ERC20::initializer_ERC(name,symbol);
     initalize_allones(value);
@@ -44,6 +59,7 @@ mod ERC4626 {
     let balance = ERC20::balance_of(caller);
     return balance;
     }
+}
 
     //internal
 
